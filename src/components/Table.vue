@@ -1,45 +1,17 @@
 <template>
-  <section>
+  <section class="table__section">
     <h2 class="">Таблица</h2>
     <table class="table">
       <thead>
         <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>ZIP</th>
-          <th>Birthday</th>
-          <th>Points</th>
-          <th>Average</th>
-          <th>Amount</th>
+          <th>Скорость, м/с</th>
+          <th>Время, с</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Gloria</td>
-          <td>Reeves</td>
-          <td>67439</td>
-          <td>10/18/1985</td>
-          <td>4</td>
-          <td>0.1</td>
-          <td>$50</td>
-        </tr>
-        <tr>
-          <td>Gloria</td>
-          <td>Reeves</td>
-          <td>67439</td>
-          <td>10/18/1985</td>
-          <td>4</td>
-          <td>0.1</td>
-          <td>$50</td>
-        </tr>
-        <tr>
-          <td>Gloria</td>
-          <td>Reeves</td>
-          <td>67439</td>
-          <td>10/18/1985</td>
-          <td>4</td>
-          <td>0.1</td>
-          <td>$50</td>
+        <tr v-for="index in chartList[activeFile].speed.length">
+          <td>{{ chartList[activeFile].speed[index - 1] }}</td>
+          <td>{{ chartList[activeFile].time[index - 1] }}</td>
         </tr>
       </tbody>
     </table>
@@ -47,8 +19,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-
+  computed: {
+    ...mapState({
+      chartList: state => state.chartsData,
+      activeFile: state => state.activeFile,
+    }),
+  },
 }
 </script>
 
@@ -58,6 +36,13 @@ export default {
   margin-bottom: 20px;
   border: 1px solid #dddddd;
   border-collapse: collapse;
+}
+
+.table__section {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  float: left;
 }
 
 .table th {
@@ -70,5 +55,22 @@ export default {
 .table td {
   border: 1px solid #dddddd;
   padding: 5px;
+}
+
+.table__section::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+.table__section::-webkit-scrollbar {
+  width: 5px;
+  background-color: #F5F5F5;
+}
+
+.table__section::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
 }
 </style>

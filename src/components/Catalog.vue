@@ -2,25 +2,34 @@
   <section class="catalog">
     <h2>Каталог</h2>
     <ul class="catalog__buttons">
-      <li>
-        <button class="catalog__button catalog__button--active">Траектория 1</button>
-      </li>
-      <li>
-        <button class="catalog__button">Траектория 1</button>
-      </li>
-      <li>
-        <button class="catalog__button">Траектория 1</button>
-      </li>
-      <li>
-        <button class="catalog__button">Траектория 1</button>
+      <li v-for="btn in  buttonList " :key="btn.id">
+        <button @click="setActiveFile(btn.id - 1)" class="catalog__button" :class="{
+          'catalog__button--active': btn.id === activeFile + 1
+        }">Траектория {{ btn.id }}
+        </button>
       </li>
     </ul>
   </section>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 export default {
-
+  data() {
+    return {
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setActiveFile: 'setActiveFile',
+    }),
+  },
+  computed: {
+    ...mapState({
+      buttonList: state => state.chartsData,
+      activeFile: state => state.activeFile,
+    }),
+  },
 }
 </script>
 

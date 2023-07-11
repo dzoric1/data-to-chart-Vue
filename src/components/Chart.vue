@@ -1,21 +1,22 @@
 <template>
-  <section class="hhh">
+  <section class="chart">
     <h2 class="">График</h2>
-    <BarChart />
+    <LineChart />
   </section>
 </template>
 
 <script>
-import BarChart from './BarChart.vue'
+import LineChart from './LineChart.vue'
 export default {
   components: {
-    BarChart
+    LineChart
   },
 }
 </script>
 
 <style scoped>
-.hhh {
+.chart {
+  padding: 0 30px;
   max-height: 90%;
 }
 </style>
